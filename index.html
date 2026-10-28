@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071426">
+  <meta name="description" content="SMARTLINK — Conexiones inteligentes, más allá de la tecnología. Consultoría, ingeniería de soluciones y estrategia para telecomunicaciones.">
+  <title>SMARTLINK | Ezequiel Raffetto</title>
+  <style>
+    :root {
+      --navy: #071426;
+      --navy-2: #0b1d34;
+      --panel: #10243c;
+      --panel-light: #142c46;
+      --cyan: #46d6df;
+      --cyan-2: #17b8c8;
+      --white: #f5f9fc;
+      --muted: #b4c4d5;
+      --line: rgba(173, 207, 229, .17);
+      --max: 1160px;
+      --radius: 22px;
+      --shadow: 0 22px 65px rgba(0,0,0,.22);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0; background: var(--navy); color: var(--white);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: blur(18px);
+      background: rgba(7,20,38,.86); border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 245px; }
+    .brand-mark {
+      width: 42px; height: 42px; border: 1px solid rgba(70,214,223,.55); border-radius: 13px;
+      display: grid; place-items: center; color: var(--cyan);
+      background: linear-gradient(145deg, rgba(70,214,223,.14), rgba(70,214,223,.025));
+    }
+    .brand-mark svg { width: 25px; height: 25px; }
+    .brand-name { font-size: 1.06rem; font-weight: 800; letter-spacing: .13em; line-height: 1.1; }
+    .brand-person { color: var(--muted); font-size: .76rem; margin-top: 5px; letter-spacing: .015em; }
+    .nav-links { display: flex; align-items: center; gap: 25px; color: #d4dfeb; font-size: .88rem; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .lang-switch { display: flex; gap: 2px; padding: 4px; border: 1px solid var(--line); border-radius: 999px; }
+    .lang-switch button { border: 0; color: var(--muted); background: transparent; padding: 6px 9px; border-radius: 999px; cursor: pointer; font-size: .76rem; font-weight: 800; }
+    .lang-switch button.active { color: var(--navy); background: var(--cyan); }
+    .btn {
+      display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+      border: 1px solid transparent; border-radius: 12px; padding: 13px 18px;
+      font-weight: 750; font-size: .9rem; cursor: pointer; transition: transform .2s, background .2s, border-color .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: #03131f; background: var(--cyan); box-shadow: 0 9px 30px rgba(23,184,200,.17); }
+    .btn-primary:hover { background: #70e4e9; }
+    .btn-secondary { border-color: rgba(180,210,232,.28); color: var(--white); background: rgba(255,255,255,.025); }
+    .btn-secondary:hover { border-color: var(--cyan); }
+    .mobile-menu { display: none; background: transparent; color: white; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+    .hero { position: relative; overflow: hidden; padding: 96px 0 82px; }
+    .hero:before {
+      content: ""; position: absolute; width: 760px; height: 760px; right: -170px; top: -170px; pointer-events: none;
+      background: radial-gradient(circle, rgba(23,184,200,.14), rgba(23,184,200,0) 68%);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 56px; position: relative; z-index: 1; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: .17em; color: var(--cyan); font-size: .72rem; font-weight: 800; }
+    .eyebrow:before { content: ""; width: 26px; height: 1px; background: var(--cyan); }
+    h1 { font-size: clamp(2.8rem, 5.3vw, 5.2rem); line-height: 1.02; letter-spacing: -.055em; margin: 22px 0 22px; max-width: 720px; }
+    h1 .accent { color: var(--cyan); }
+    .hero-copy { max-width: 610px; color: #c0cedc; font-size: 1.08rem; }
+    .hero-copy strong { color: var(--white); font-weight: 650; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 30px 0 28px; }
+    .proofline { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; color: #9fb2c7; font-size: .82rem; }
+    .proofline span { display: inline-flex; align-items: center; gap: 8px; }
+    .proofline i { display: inline-block; width: 5px; height: 5px; background: var(--cyan); border-radius: 50%; }
+    .visual {
+      position: relative; min-height: 440px; border: 1px solid rgba(112,167,202,.2); border-radius: 28px;
+      overflow: hidden; background: linear-gradient(145deg, rgba(20,44,70,.9), rgba(8,25,44,.7));
+      box-shadow: var(--shadow); isolation: isolate;
+    }
+    .visual:before { content:""; position:absolute; inset:0; background-image: linear-gradient(rgba(151,199,222,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(151,199,222,.04) 1px, transparent 1px); background-size: 35px 35px; mask-image: linear-gradient(to bottom, black, transparent 90%); }
+    .network-art { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .floating-card { position: absolute; border: 1px solid rgba(126,190,218,.25); border-radius: 15px; background: rgba(8,24,42,.86); backdrop-filter: blur(12px); padding: 14px 16px; box-shadow: 0 12px 35px rgba(0,0,0,.18); }
+    .floating-card small { display:block; color:#9eb3c8; font-size:.69rem; letter-spacing:.08em; text-transform:uppercase; }
+    .floating-card strong { display:block; margin-top:5px; font-size:.94rem; }
+    .card-a { left: 7%; top: 11%; }
+    .card-b { right: 6%; top: 42%; }
+    .card-c { left: 13%; bottom: 9%; }
+    .signal { display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--cyan); margin-right:7px; box-shadow:0 0 12px var(--cyan); }
+    .section { padding: 88px 0; }
+    .section.alt { background: #091a2d; border-top: 1px solid rgba(173,207,229,.08); border-bottom: 1px solid rgba(173,207,229,.08); }
+    .section-head { max-width: 760px; margin-bottom: 38px; }
+    .kicker { color: var(--cyan); font-size: .73rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 800; }
+    h2 { margin: 12px 0 14px; font-size: clamp(2rem, 3.6vw, 3.15rem); letter-spacing: -.04em; line-height: 1.1; }
+    .section-head p, .body-copy { color: var(--muted); font-size: 1rem; }
+    .about-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: 60px; align-items: start; }
+    .about-callout { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, rgba(70,214,223,.08), rgba(255,255,255,.015)); }
+    .about-callout .big-number { color: var(--cyan); font-size: 3.2rem; font-weight: 800; letter-spacing: -.06em; line-height: 1; }
+    .about-callout p { color: #c1d0de; margin-bottom: 0; }
+    .services { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+    .service-card { padding: 27px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.025); transition: border-color .2s, transform .2s, background .2s; }
+    .service-card:hover { transform: translateY(-4px); border-color: rgba(70,214,223,.42); background: rgba(70,214,223,.045); }
+    .iconbox { width: 48px; height: 48px; display: grid; place-items: center; color: var(--cyan); background: rgba(70,214,223,.1); border: 1px solid rgba(70,214,223,.16); border-radius: 14px; margin-bottom: 20px; }
+    .iconbox svg { width: 24px; height: 24px; }
+    h3 { margin: 0 0 9px; font-size: 1.13rem; letter-spacing: -.015em; }
+    .service-card p { color: var(--muted); margin: 0 0 17px; font-size: .93rem; }
+    .tag { color: #7edfe6; font-size: .73rem; letter-spacing: .04em; }
+    .experience-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+    .experience-card { padding: 25px; border-radius: var(--radius); background: var(--panel); border: 1px solid rgba(173,207,229,.12); }
+    .experience-card .label { color: var(--cyan); font-size: .7rem; font-weight: 800; letter-spacing: .13em; }
+    .experience-card h3 { margin-top: 12px; }
+    .experience-card p { color: var(--muted); font-size: .92rem; margin-bottom: 0; }
+    .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; counter-reset: steps; }
+    .step { counter-increment: steps; padding: 24px 20px; border-top: 1px solid rgba(70,214,223,.5); background: linear-gradient(180deg, rgba(70,214,223,.055), transparent); }
+    .step:before { content: "0" counter(steps); color: var(--cyan); font-size: .78rem; font-weight: 800; letter-spacing: .12em; }
+    .step h3 { margin-top: 18px; }
+    .step p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .insights { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .article { display:flex; flex-direction:column; min-height: 220px; padding: 23px; border-radius: var(--radius); border: 1px solid var(--line); background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); }
+    .article .article-no { color: var(--cyan); font-size: .72rem; font-weight: 800; letter-spacing: .14em; }
+    .article h3 { margin: 20px 0; font-size: 1.1rem; }
+    .article span { margin-top:auto; color: #91a9bf; font-size: .8rem; }
+    .contact-panel { display:grid; grid-template-columns: 1fr .8fr; gap: 42px; padding: clamp(28px,5vw,55px); border: 1px solid rgba(70,214,223,.24); border-radius: 28px; background: radial-gradient(circle at 100% 0%, rgba(23,184,200,.15), transparent 43%), linear-gradient(135deg, #10243c, #0a1a2d); box-shadow: var(--shadow); }
+    .contact-panel p { color: var(--muted); }
+    .contact-links { display:flex; flex-direction:column; gap:12px; justify-content:center; }
+    .contact-link { display:flex; align-items:center; gap:12px; padding:15px; border:1px solid var(--line); border-radius:13px; background:rgba(255,255,255,.025); overflow-wrap:anywhere; }
+    .contact-link:hover { border-color:rgba(70,214,223,.5); }
+    .contact-link svg { flex:0 0 auto; color:var(--cyan); width:20px; height:20px; }
+    .contact-form { display:grid; gap:12px; margin-top:20px; }
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    input, select, textarea { width:100%; color:var(--white); background:rgba(3,13,25,.55); border:1px solid rgba(173,207,229,.22); border-radius:10px; padding:12px 13px; outline:none; }
+    input:focus, select:focus, textarea:focus { border-color:var(--cyan); box-shadow:0 0 0 3px rgba(70,214,223,.1); }
+    input::placeholder, textarea::placeholder { color:#8095aa; }
+    select option { background:var(--navy); }
+    textarea { min-height:110px; resize:vertical; }
+    .form-note { color:#8fa6bb; font-size:.76rem; margin:0; }
+    footer { padding: 28px 0; border-top:1px solid var(--line); color:#91a5b9; font-size:.82rem; }
+    .footer-inner { display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+    .footer-brand { color:var(--white); font-weight:800; letter-spacing:.12em; }
+    .footer-links { display:flex; gap:18px; }
+    .footer-links a:hover { color:var(--cyan); }
+    [data-i18n] { transition: opacity .12s; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    @media (max-width: 980px) {
+      .nav-links { gap:14px; }
+      .nav-links a { font-size:.8rem; }
+      .nav .btn { display:none; }
+      .hero-grid { gap:30px; }
+      .visual { min-height:390px; }
+      .steps { grid-template-columns:repeat(2,1fr); }
+      .contact-panel { grid-template-columns:1fr; }
+    }
+    @media (max-width: 760px) {
+      .container { width:min(100% - 32px, var(--max)); }
+      .nav { min-height:72px; }
+      .brand { min-width:0; gap:9px; }
+      .brand-mark { width:38px; height:38px; }
+      .brand-name { font-size:.95rem; }
+      .brand-person { font-size:.68rem; }
+      .mobile-menu { display:block; }
+      .nav-links { display:none; position:absolute; top:71px; left:0; right:0; padding:18px 22px 22px; flex-direction:column; align-items:stretch; background:#08182b; border-bottom:1px solid var(--line); }
+      .nav-links.open { display:flex; }
+      .nav-links a { font-size:.95rem; padding:7px 0; }
+      .nav-actions { gap:8px; }
+      .hero { padding:65px 0 55px; }
+      .hero-grid { grid-template-columns:1fr; }
+      h1 { font-size:clamp(2.7rem, 12vw, 4rem); }
+      .hero-copy { font-size:1rem; }
+      .visual { min-height:350px; }
+      .section { padding:64px 0; }
+      .about-grid { grid-template-columns:1fr; gap:24px; }
+      .services, .experience-grid, .insights { grid-template-columns:1fr; }
+      .service-card { padding:23px; }
+      .steps { grid-template-columns:1fr 1fr; gap:8px; }
+      .step { padding:18px 12px; }
+      .contact-panel { padding:24px; gap:24px; }
+      .field-row { grid-template-columns:1fr; }
+      .footer-inner { align-items:flex-start; flex-direction:column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *, *:before, *:after { transition:none !important; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="SMARTLINK - inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><circle cx="7" cy="16" r="3" stroke="currentColor" stroke-width="1.8"/><circle cx="24.5" cy="7" r="3" stroke="currentColor" stroke-width="1.8"/><circle cx="24.5" cy="25" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 15L21.7 8.5M10 17L21.8 23.5M24.5 10V22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </span>
+        <span><span class="brand-name">SMARTLINK</span></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+        <a href="#sobre-mi" data-i18n="navAbout">Sobre mí</a>
+        <a href="#servicios" data-i18n="navServices">Servicios</a>
+        <a href="#experiencia" data-i18n="navExperience">Experiencia</a>
+        <a href="#contacto" data-i18n="navContact">Contacto</a>
+      </nav>
+      <div class="nav-actions">
+        <div class="lang-switch" role="group" aria-label="Language selector">
+          <button type="button" class="active" data-lang="es" aria-pressed="true">ES</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="btn btn-primary" href="#contacto" data-i18n="navCta">Hablemos <span aria-hidden="true">↗</span></a>
+        <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow" data-i18n="heroEyebrow">Consultoría · Ingeniería · Estrategia</div>
+          <h1 data-i18n="heroTitle">Conexiones inteligentes, <span class="accent">más allá de la tecnología.</span></h1>
+          <p class="hero-copy" data-i18n="heroCopy"><strong>Conectamos ingeniería, estrategia y negocio</strong> para transformar desafíos tecnológicos en oportunidades reales. Soy Ezequiel Raffetto y pongo mi experiencia en telecomunicaciones y gestión de soluciones al servicio de organizaciones que buscan avanzar con claridad.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contacto" data-i18n="heroCta">Hablemos de tu próximo desafío <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-secondary" href="#experiencia" data-i18n="heroSecondary">Conocé mi experiencia</a>
+          </div>
+          <div class="proofline">
+            <span><i></i><span data-i18n="proof1">Más de 15 años en telecomunicaciones</span></span>
+            <span><i></i><span data-i18n="proof2">Experiencia regional</span></span>
+            <span><i></i><span data-i18n="proof3">Visión técnica y comercial</span></span>
+          </div>
+        </div>
+        <div class="visual" aria-label="Ilustración abstracta de conexiones inteligentes">
+          <svg class="network-art" viewBox="0 0 600 520" fill="none" role="img" aria-label="Abstract network connections">
+            <defs><linearGradient id="wire" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#46d6df" stop-opacity=".1"/><stop offset=".55" stop-color="#46d6df" stop-opacity=".9"/><stop offset="1" stop-color="#3b91d6" stop-opacity=".3"/></linearGradient><radialGradient id="glow"><stop stop-color="#46d6df" stop-opacity=".25"/><stop offset="1" stop-color="#46d6df" stop-opacity="0"/></radialGradient></defs>
+            <circle cx="315" cy="256" r="190" fill="url(#glow)"/>
+            <g stroke="url(#wire)" stroke-width="1.5">
+              <path d="M73 126L196 185L307 104L434 161L527 93"/><path d="M73 126L112 300L226 353L307 256L434 161L481 330L535 411"/><path d="M112 300L196 185L307 256L226 353L340 445L481 330L434 161"/><path d="M196 185L224 63L307 104L365 28"/><path d="M307 256L398 250L481 330L434 450"/><path d="M226 353L165 456L340 445L434 450"/><path d="M398 250L527 93"/>
+            </g>
+            <g fill="#071426" stroke="#46d6df" stroke-width="2">
+              <circle cx="73" cy="126" r="6"/><circle cx="196" cy="185" r="7"/><circle cx="307" cy="104" r="6"/><circle cx="434" cy="161" r="8"/><circle cx="527" cy="93" r="5"/><circle cx="112" cy="300" r="7"/><circle cx="226" cy="353" r="5"/><circle cx="307" cy="256" r="11"/><circle cx="481" cy="330" r="7"/><circle cx="535" cy="411" r="5"/><circle cx="340" cy="445" r="7"/><circle cx="165" cy="456" r="5"/><circle cx="224" cy="63" r="5"/><circle cx="365" cy="28" r="5"/><circle cx="398" cy="250" r="5"/><circle cx="434" cy="450" r="5"/>
+            </g>
+            <circle cx="307" cy="256" r="24" stroke="#46d6df" stroke-opacity=".45"/><circle cx="307" cy="256" r="39" stroke="#46d6df" stroke-opacity=".16"/>
+          </svg>
+          <div class="floating-card card-a"><small data-i18n="visualCard1Label">Perspectiva</small><strong><span class="signal"></span><span data-i18n="visualCard1">Tecnología + negocio</span></strong></div>
+          <div class="floating-card card-b"><small data-i18n="visualCard2Label">Enfoque</small><strong data-i18n="visualCard2">Soluciones conectadas</strong></div>
+          <div class="floating-card card-c"><small data-i18n="visualCard3Label">Objetivo</small><strong data-i18n="visualCard3">Valor real y sostenible</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="sobre-mi">
+      <div class="container about-grid">
+        <div class="about-callout">
+          <div class="big-number">15+</div>
+          <p data-i18n="aboutStat">Años de experiencia en telecomunicaciones, ingeniería de soluciones y gestión técnico-comercial.</p>
+        </div>
+        <div>
+          <div class="kicker" data-i18n="aboutKicker">Sobre mí</div>
+          <h2 data-i18n="aboutTitle">La tecnología es el medio. El valor está en cómo la conectamos con el negocio.</h2>
+          <p class="body-copy" data-i18n="aboutP1">Mi trayectoria combina ingeniería, desarrollo de soluciones, interacción con clientes y coordinación de iniciativas en el sector de las telecomunicaciones.</p>
+          <p class="body-copy" data-i18n="aboutP2">Trabajé con equipos técnicos y comerciales, operadores y organizaciones de distintos países de Latinoamérica. Esa experiencia me permite comprender necesidades, evaluar alternativas y conectar decisiones técnicas con objetivos de negocio.</p>
+          <p class="body-copy" data-i18n="aboutP3">Con SMARTLINK busco poner esa experiencia al servicio de organizaciones que necesitan una mirada técnica sólida, visión estratégica y un interlocutor que comprenda ambas dimensiones.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicios">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker" data-i18n="servicesKicker">Qué puedo aportar</div>
+          <h2 data-i18n="servicesTitle">Conocimiento técnico conectado con objetivos reales.</h2>
+          <p data-i18n="servicesIntro">Acompañamiento flexible y especializado para analizar desafíos, evaluar alternativas y tomar mejores decisiones tecnológicas.</p>
+        </div>
+        <div class="services">
+          <article class="service-card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="5" cy="12" r="2.3"/><circle cx="19" cy="5" r="2.3"/><circle cx="19" cy="19" r="2.3"/><path d="M7.2 11.2l9.6-5M7.2 12.8l9.6 5"/></svg></div>
+            <h3 data-i18n="service1Title">Consultoría en telecomunicaciones</h3>
+            <p data-i18n="service1Desc">Análisis de necesidades, evaluación de alternativas tecnológicas y acompañamiento en decisiones relacionadas con la evolución de redes.</p>
+            <div class="tag" data-i18n="service1Tag">Telecom Consulting · Network Evolution</div>
+          </article>
+          <article class="service-card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4a2 2 0 0 1 2 2v5.5M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></div>
+            <h3 data-i18n="service2Title">Ingeniería y arquitectura de soluciones</h3>
+            <p data-i18n="service2Desc">Diseño, planificación y evaluación de soluciones de transporte óptico, redes IP y tecnologías de acceso móvil.</p>
+            <div class="tag" data-i18n="service2Tag">Solution Engineering · Network Architecture</div>
+          </article>
+          <article class="service-card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6"/></svg></div>
+            <h3 data-i18n="service3Title">Soporte técnico-comercial</h3>
+            <p data-i18n="service3Desc">Articulación entre requerimientos del cliente, ingeniería, preventa y desarrollo de propuestas técnicas y económicas.</p>
+            <div class="tag" data-i18n="service3Tag">Technical & Commercial Advisory</div>
+          </article>
+          <article class="service-card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18M7 14l4-4 3 3 6-7"/><path d="M16 6h4v4"/></svg></div>
+            <h3 data-i18n="service4Title">Gestión y optimización de procesos</h3>
+            <p data-i18n="service4Desc">Identificación de oportunidades de mejora, coordinación de equipos y optimización de flujos de trabajo en proyectos tecnológicos.</p>
+            <div class="tag" data-i18n="service4Tag">Project & Process Improvement</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="experiencia">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker" data-i18n="experienceKicker">Experiencia que genera confianza</div>
+          <h2 data-i18n="experienceTitle">Experiencia aplicada a desafíos de alto impacto.</h2>
+          <p data-i18n="experienceIntro">Una trayectoria que combina evolución tecnológica, colaboración regional y mejora de procesos.</p>
+        </div>
+        <div class="experience-grid">
+          <article class="experience-card"><div class="label">NETWORK EVOLUTION</div><h3 data-i18n="exp1Title">Modernización de redes ópticas</h3><p data-i18n="exp1Desc">Experiencia en diseño y modernización de redes DWDM, incluida la evolución hacia arquitecturas ROADM CDC-F en proyectos para operadores de la región.</p></article>
+          <article class="experience-card"><div class="label">5G INNOVATION</div><h3 data-i18n="exp2Title">Demostración en vivo de 5G</h3><p data-i18n="exp2Desc">Participación en una demostración en vivo de 5G para empleados de Telecom Argentina, incluidos directivos, en 2018.</p></article>
+          <article class="experience-card"><div class="label">REGIONAL DELIVERY</div><h3 data-i18n="exp3Title">Despliegues LTE y Small Cells</h3><p data-i18n="exp3Desc">Experiencia vinculada al despliegue de la primera red LTE de Sudamérica con ANTEL en Uruguay y una red Small Cells multinacional para AMX en Argentina, Uruguay y Paraguay.</p></article>
+          <article class="experience-card"><div class="label">PROCESS IMPROVEMENT</div><h3 data-i18n="exp4Title">Automatización y eficiencia operativa</h3><p data-i18n="exp4Desc">Trabajo en automatización del registro de órdenes de compra e iniciativas de mejora operativa y coordinación regional.</p></article>
+        </div>
+        <p class="form-note" style="margin-top:16px" data-i18n="experienceNote">Los proyectos se presentan de forma resumida. Los detalles y atribuciones se validarán antes de publicar información sensible o confidencial.</p>
+      </div>
+    </section>
+
+    <section class="section" id="metodo">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker" data-i18n="methodKicker">Mi forma de trabajar</div>
+          <h2 data-i18n="methodTitle">De entender el desafío a generar valor.</h2>
+        </div>
+        <div class="steps">
+          <article class="step"><h3 data-i18n="step1Title">Entender</h3><p data-i18n="step1Desc">Comprender el contexto, las necesidades y los objetivos antes de proponer una solución.</p></article>
+          <article class="step"><h3 data-i18n="step2Title">Diseñar</h3><p data-i18n="step2Desc">Evaluar alternativas técnicas, económicas y operativas para identificar el mejor camino posible.</p></article>
+          <article class="step"><h3 data-i18n="step3Title">Conectar</h3><p data-i18n="step3Desc">Alinear personas, equipos, tecnología y prioridades de negocio.</p></article>
+          <article class="step"><h3 data-i18n="step4Title">Generar valor</h3><p data-i18n="step4Desc">Acompañar el proceso hacia resultados concretos y medibles cuando corresponda.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="ideas">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker" data-i18n="insightsKicker">Ideas y conocimiento</div>
+          <h2 data-i18n="insightsTitle">Pensar la tecnología desde una perspectiva integral.</h2>
+          <p data-i18n="insightsIntro">Temas para compartir aprendizajes y abrir conversaciones sobre evolución de redes, estrategia y valor.</p>
+        </div>
+        <div class="insights">
+          <article class="article"><div class="article-no">01 / NETWORK STRATEGY</div><h3 data-i18n="article1">¿Cómo evolucionar una red sin perder de vista el negocio?</h3><span data-i18n="articleComing">Próximamente · Artículo de SMARTLINK</span></article>
+          <article class="article"><div class="article-no">02 / SOLUTION VALUE</div><h3 data-i18n="article2">De la arquitectura de red a la propuesta de valor.</h3><span data-i18n="articleComing">Próximamente · Artículo de SMARTLINK</span></article>
+          <article class="article"><div class="article-no">03 / TECHNOLOGY TRENDS</div><h3 data-i18n="article3">5G, redes ópticas e IP: decisiones con visión integral.</h3><span data-i18n="articleComing">Próximamente · Artículo de SMARTLINK</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacto">
+      <div class="container">
+        <div class="contact-panel">
+          <div>
+            <div class="kicker" data-i18n="contactKicker">Conectemos</div>
+            <h2 data-i18n="contactTitle">Cada desafío puede ser el comienzo de una gran solución.</h2>
+            <p data-i18n="contactIntro">Contame qué necesita tu organización. Exploremos cómo conectar tecnología, estrategia y resultados.</p>
+            <form class="contact-form" id="contactForm">
+              <div class="field-row">
+                <label><span class="sr-only" data-i18n="nameLabel">Nombre</span><input name="name" required autocomplete="name" placeholder="Nombre y apellido" data-i18n-placeholder="namePlaceholder"></label>
+                <label><span class="sr-only" data-i18n="companyLabel">Empresa</span><input name="company" autocomplete="organization" placeholder="Empresa (opcional)" data-i18n-placeholder="companyPlaceholder"></label>
+              </div>
+              <div class="field-row">
+                <label><span class="sr-only">Email</span><input name="email" type="email" required autocomplete="email" placeholder="Email profesional" data-i18n-placeholder="emailPlaceholder"></label>
+                <label><span class="sr-only" data-i18n="topicLabel">Tema de consulta</span><select name="topic" id="topicSelect"><option value="Consultoría en telecomunicaciones" data-i18n="topic1">Consultoría en telecomunicaciones</option><option value="Ingeniería de soluciones" data-i18n="topic2">Ingeniería de soluciones</option><option value="Soporte técnico-comercial" data-i18n="topic3">Soporte técnico-comercial</option><option value="Otro" data-i18n="topic4">Otro</option></select></label>
+              </div>
+              <label><span class="sr-only" data-i18n="messageLabel">Mensaje</span><textarea name="message" required placeholder="Contame brevemente sobre tu desafío..." data-i18n-placeholder="messagePlaceholder"></textarea></label>
+              <button class="btn btn-primary" type="submit"><span data-i18n="formCta">Preparar consulta por email</span> <span aria-hidden="true">↗</span></button>
+              <p class="form-note" data-i18n="formNote">Se abrirá tu aplicación de correo con el mensaje preparado para revisar y enviar. El formulario no almacena tus datos.</p>
+            </form>
+          </div>
+          <div class="contact-links">
+            <a class="contact-link" href="mailto:ezequiel.raffetto@yahoo.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><small data-i18n="emailLabel">Email profesional</small><br><strong>ezequiel.raffetto@yahoo.com</strong></span></a>
+            <a class="contact-link" href="https://www.linkedin.com/in/raffetto" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.35V8.99h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.45v6.3ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V8.99h3.56v11.46ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg><span><small>LinkedIn</small><br><strong data-i18n="linkedinText">Conectemos profesionalmente</strong></span></a>
+            <div class="contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg><span><small data-i18n="reachLabel">Alcance</small><br><strong data-i18n="reachText">Argentina · Latinoamérica · Internacional</strong></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div><span class="footer-brand">SMARTLINK</span> <span data-i18n="footerTagline">— Conexiones inteligentes, más allá de la tecnología.</span><br><span>© <span id="year"></span> SMARTLINK · Ezequiel Raffetto</span></div>
+      <div class="footer-links"><a href="#inicio" data-i18n="backTop">Volver arriba ↑</a><a href="https://www.linkedin.com/in/raffetto" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      es: {
+        navAbout:"Sobre mí", navServices:"Servicios", navExperience:"Experiencia", navContact:"Contacto", navCta:"Hablemos",
+        heroEyebrow:"Consultoría · Ingeniería · Estrategia", heroTitle:'Conexiones inteligentes, <span class="accent">más allá de la tecnología.</span>', heroCopy:"<strong>Conectamos ingeniería, estrategia y negocio</strong> para transformar desafíos tecnológicos en oportunidades reales. Soy Ezequiel Raffetto y pongo mi experiencia en telecomunicaciones y gestión de soluciones al servicio de organizaciones que buscan avanzar con claridad.", heroCta:'Hablemos de tu próximo desafío <span aria-hidden="true">↗</span>', heroSecondary:"Conocé mi experiencia", proof1:"Más de 15 años en telecomunicaciones", proof2:"Experiencia regional", proof3:"Visión técnica y comercial",
+        visualCard1Label:"Perspectiva", visualCard1:"Tecnología + negocio", visualCard2Label:"Enfoque", visualCard2:"Soluciones conectadas", visualCard3Label:"Objetivo", visualCard3:"Valor real y sostenible",
+        aboutStat:"Años de experiencia en telecomunicaciones, ingeniería de soluciones y gestión técnico-comercial.", aboutKicker:"Sobre mí", aboutTitle:"La tecnología es el medio. El valor está en cómo la conectamos con el negocio.", aboutP1:"Mi trayectoria combina ingeniería, desarrollo de soluciones, interacción con clientes y coordinación de iniciativas en el sector de las telecomunicaciones.", aboutP2:"Trabajé con equipos técnicos y comerciales, operadores y organizaciones de distintos países de Latinoamérica. Esa experiencia me permite comprender necesidades, evaluar alternativas y conectar decisiones técnicas con objetivos de negocio.", aboutP3:"Con SMARTLINK busco poner esa experiencia al servicio de organizaciones que necesitan una mirada técnica sólida, visión estratégica y un interlocutor que comprenda ambas dimensiones.",
+        servicesKicker:"Qué puedo aportar", servicesTitle:"Conocimiento técnico conectado con objetivos reales.", servicesIntro:"Acompañamiento flexible y especializado para analizar desafíos, evaluar alternativas y tomar mejores decisiones tecnológicas.", service1Title:"Consultoría en telecomunicaciones", service1Desc:"Análisis de necesidades, evaluación de alternativas tecnológicas y acompañamiento en decisiones relacionadas con la evolución de redes.", service1Tag:"Telecom Consulting · Network Evolution", service2Title:"Ingeniería y arquitectura de soluciones", service2Desc:"Diseño, planificación y evaluación de soluciones de transporte óptico, redes IP y tecnologías de acceso móvil.", service2Tag:"Solution Engineering · Network Architecture", service3Title:"Soporte técnico-comercial", service3Desc:"Articulación entre requerimientos del cliente, ingeniería, preventa y desarrollo de propuestas técnicas y económicas.", service3Tag:"Technical & Commercial Advisory", service4Title:"Gestión y optimización de procesos", service4Desc:"Identificación de oportunidades de mejora, coordinación de equipos y optimización de flujos de trabajo en proyectos tecnológicos.", service4Tag:"Project & Process Improvement",
+        experienceKicker:"Experiencia que genera confianza", experienceTitle:"Experiencia aplicada a desafíos de alto impacto.", experienceIntro:"Una trayectoria que combina evolución tecnológica, colaboración regional y mejora de procesos.", exp1Title:"Modernización de redes ópticas", exp1Desc:"Experiencia en diseño y modernización de redes DWDM, incluida la evolución hacia arquitecturas ROADM CDC-F en proyectos para operadores de la región.", exp2Title:"Demostración en vivo de 5G", exp2Desc:"Participación en una demostración en vivo de 5G para empleados de Telecom Argentina, incluidos directivos, en 2018.", exp3Title:"Despliegues LTE y Small Cells", exp3Desc:"Experiencia vinculada al despliegue de la primera red LTE de Sudamérica con ANTEL en Uruguay y una red Small Cells multinacional para AMX en Argentina, Uruguay y Paraguay.", exp4Title:"Automatización y eficiencia operativa", exp4Desc:"Trabajo en automatización del registro de órdenes de compra e iniciativas de mejora operativa y coordinación regional.", experienceNote:"Los proyectos se presentan de forma resumida. Los detalles y atribuciones se validarán antes de publicar información sensible o confidencial.",
+        methodKicker:"Mi forma de trabajar", methodTitle:"De entender el desafío a generar valor.", step1Title:"Entender", step1Desc:"Comprender el contexto, las necesidades y los objetivos antes de proponer una solución.", step2Title:"Diseñar", step2Desc:"Evaluar alternativas técnicas, económicas y operativas para identificar el mejor camino posible.", step3Title:"Conectar", step3Desc:"Alinear personas, equipos, tecnología y prioridades de negocio.", step4Title:"Generar valor", step4Desc:"Acompañar el proceso hacia resultados concretos y medibles cuando corresponda.",
+        insightsKicker:"Ideas y conocimiento", insightsTitle:"Pensar la tecnología desde una perspectiva integral.", insightsIntro:"Temas para compartir aprendizajes y abrir conversaciones sobre evolución de redes, estrategia y valor.", article1:"¿Cómo evolucionar una red sin perder de vista el negocio?", article2:"De la arquitectura de red a la propuesta de valor.", article3:"5G, redes ópticas e IP: decisiones con visión integral.", articleComing:"Próximamente · Artículo de SMARTLINK",
+        contactKicker:"Conectemos", contactTitle:"Cada desafío puede ser el comienzo de una gran solución.", contactIntro:"Contame qué necesita tu organización. Exploremos cómo conectar tecnología, estrategia y resultados.", nameLabel:"Nombre", namePlaceholder:"Nombre y apellido", companyLabel:"Empresa", companyPlaceholder:"Empresa (opcional)", emailPlaceholder:"Email profesional", topicLabel:"Tema de consulta", topic1:"Consultoría en telecomunicaciones", topic2:"Ingeniería de soluciones", topic3:"Soporte técnico-comercial", topic4:"Otro", messageLabel:"Mensaje", messagePlaceholder:"Contame brevemente sobre tu desafío...", formCta:"Preparar consulta por email", formNote:"Se abrirá tu aplicación de correo con el mensaje preparado para revisar y enviar. El formulario no almacena tus datos.", emailLabel:"Email profesional", linkedinText:"Conectemos profesionalmente", reachLabel:"Alcance", reachText:"Argentina · Latinoamérica · Internacional", footerTagline:"— Conexiones inteligentes, más allá de la tecnología.", backTop:"Volver arriba ↑", menuOpen:"Abrir menú", menuClose:"Cerrar menú", formSubject:"Consulta desde la web de SMARTLINK"
+      },
+      en: {
+        navAbout:"About", navServices:"Services", navExperience:"Experience", navContact:"Contact", navCta:"Let's talk",
+        heroEyebrow:"Consulting · Engineering · Strategy", heroTitle:'Intelligent connections, <span class="accent">beyond technology.</span>', heroCopy:"<strong>We connect engineering, strategy and business</strong> to turn technology challenges into real opportunities. I'm Ezequiel Raffetto, bringing my telecommunications and solution-management experience to organizations looking to move forward with clarity.", heroCta:'Let’s discuss your next challenge <span aria-hidden="true">↗</span>', heroSecondary:"Explore my experience", proof1:"15+ years in telecommunications", proof2:"Regional experience", proof3:"Technical and business perspective",
+        visualCard1Label:"Perspective", visualCard1:"Technology + business", visualCard2Label:"Approach", visualCard2:"Connected solutions", visualCard3Label:"Goal", visualCard3:"Sustainable, real value",
+        aboutStat:"Years of experience in telecommunications, solution engineering and technical-commercial management.", aboutKicker:"About me", aboutTitle:"Technology is the means. Value comes from connecting it to business.", aboutP1:"My career combines engineering, solution development, customer engagement and initiative coordination in the telecommunications sector.", aboutP2:"I've worked with technical and commercial teams, operators and organizations across Latin America. This experience helps me understand needs, assess alternatives and connect technical decisions with business objectives.", aboutP3:"Through SMARTLINK, I aim to bring this experience to organizations looking for technical depth, strategic thinking and a partner who understands both sides.",
+        servicesKicker:"How I can help", servicesTitle:"Technical expertise connected to real objectives.", servicesIntro:"Flexible, specialized support to assess challenges, evaluate alternatives and make better technology decisions.", service1Title:"Telecommunications consulting", service1Desc:"Needs assessment, technology evaluation and guidance on network evolution decisions.", service1Tag:"Telecom Consulting · Network Evolution", service2Title:"Solution engineering & architecture", service2Desc:"Design, planning and evaluation of optical transport, IP networking and mobile access solutions.", service2Tag:"Solution Engineering · Network Architecture", service3Title:"Technical-commercial advisory", service3Desc:"Bridging customer requirements, engineering, pre-sales and technical and commercial proposals.", service3Tag:"Technical & Commercial Advisory", service4Title:"Process management & optimization", service4Desc:"Identifying improvement opportunities, coordinating teams and optimizing workflows in technology projects.", service4Tag:"Project & Process Improvement",
+        experienceKicker:"Experience that builds trust", experienceTitle:"Experience applied to high-impact challenges.", experienceIntro:"A career combining technology evolution, regional collaboration and process improvement.", exp1Title:"Optical network modernization", exp1Desc:"Experience designing and modernizing DWDM networks, including evolution toward ROADM CDC-F architectures in projects for regional operators.", exp2Title:"Live 5G demonstration", exp2Desc:"Participated in a live 5G demonstration for Telecom Argentina employees, including senior executives, in 2018.", exp3Title:"LTE and Small Cells deployments", exp3Desc:"Experience related to the deployment of South America's first LTE network with ANTEL in Uruguay and a multinational Small Cells network for AMX in Argentina, Uruguay and Paraguay.", exp4Title:"Automation and operational efficiency", exp4Desc:"Worked on purchase-order registration automation and operational improvement and regional coordination initiatives.", experienceNote:"Projects are presented in summary form. Details and attributions should be validated before publishing sensitive or confidential information.",
+        methodKicker:"How I work", methodTitle:"From understanding the challenge to delivering value.", step1Title:"Understand", step1Desc:"Understand context, needs and objectives before proposing a solution.", step2Title:"Design", step2Desc:"Assess technical, financial and operational alternatives to identify the best path forward.", step3Title:"Connect", step3Desc:"Align people, teams, technology and business priorities.", step4Title:"Deliver value", step4Desc:"Support the process toward concrete and measurable outcomes where appropriate.",
+        insightsKicker:"Insights & ideas", insightsTitle:"A broader perspective on technology.", insightsIntro:"Ideas to share lessons learned and spark conversations about network evolution, strategy and value.", article1:"How can networks evolve without losing sight of business goals?", article2:"From network architecture to value proposition.", article3:"5G, optical and IP networks: making decisions with an end-to-end view.", articleComing:"Coming soon · SMARTLINK article",
+        contactKicker:"Let's connect", contactTitle:"Every challenge can be the start of a great solution.", contactIntro:"Tell me what your organization needs. Let's explore how to connect technology, strategy and outcomes.", nameLabel:"Name", namePlaceholder:"Full name", companyLabel:"Company", companyPlaceholder:"Company (optional)", emailPlaceholder:"Business email", topicLabel:"Inquiry topic", topic1:"Telecommunications consulting", topic2:"Solution engineering", topic3:"Technical-commercial advisory", topic4:"Other", messageLabel:"Message", messagePlaceholder:"Briefly tell me about your challenge...", formCta:"Prepare email inquiry", formNote:"Your email app will open with a prepared message for you to review and send. This form does not store your data.", emailLabel:"Professional email", linkedinText:"Connect professionally", reachLabel:"Reach", reachText:"Argentina · Latin America · International", footerTagline:"— Intelligent connections, beyond technology.", backTop:"Back to top ↑", menuOpen:"Open menu", menuClose:"Close menu", formSubject:"Inquiry from the SMARTLINK website"
+      }
+    };
+    let currentLang = "es";
+    const languageButtons = document.querySelectorAll("[data-lang]");
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.title = lang === "es" ? "SMARTLINK | Ezequiel Raffetto" : "SMARTLINK | Ezequiel Raffetto";
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.dataset.i18n;
+        if (translations[lang][key] !== undefined) el.innerHTML = translations[lang][key];
+      });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        const key = el.dataset.i18nPlaceholder;
+        if (translations[lang][key] !== undefined) el.placeholder = translations[lang][key];
+      });
+      languageButtons.forEach(btn => {
+        const active = btn.dataset.lang === lang;
+        btn.classList.toggle("active", active);
+        btn.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+      document.getElementById("mobileMenu").setAttribute("aria-label", translations[lang].menuOpen);
+      const topic = document.getElementById("topicSelect");
+      [...topic.options].forEach(option => {
+        const key = option.dataset.i18n;
+        if (key && translations[lang][key]) option.textContent = translations[lang][key];
+      });
+    }
+    languageButtons.forEach(btn => btn.addEventListener("click", () => setLanguage(btn.dataset.lang)));
+    const mobileMenu = document.getElementById("mobileMenu");
+    const navLinks = document.getElementById("navLinks");
+    mobileMenu.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      mobileMenu.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      mobileMenu.textContent = isOpen ? "×" : "☰";
+      mobileMenu.setAttribute("aria-label", isOpen ? translations[currentLang].menuClose : translations[currentLang].menuOpen);
+    });
+    navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      mobileMenu.setAttribute("aria-expanded", "false");
+      mobileMenu.textContent = "☰";
+    }));
+    document.getElementById("contactForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const form = new FormData(event.currentTarget);
+      const name = form.get("name");
+      const company = form.get("company") || (currentLang === "es" ? "No especificada" : "Not specified");
+      const email = form.get("email");
+      const topic = document.getElementById("topicSelect").selectedOptions[0].textContent;
+      const message = form.get("message");
+      const subject = translations[currentLang].formSubject + " — " + topic;
+      const body = currentLang === "es"
+        ? `Hola Ezequiel,\n\nMi nombre es ${name}.\nEmpresa: ${company}\nEmail: ${email}\nTema: ${topic}\n\n${message}\n\nSaludos.`
+        : `Hello Ezequiel,\n\nMy name is ${name}.\nCompany: ${company}\nEmail: ${email}\nTopic: ${topic}\n\n${message}\n\nBest regards.`;
+      window.location.href = `mailto:ezequiel.raffetto@yahoo.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
